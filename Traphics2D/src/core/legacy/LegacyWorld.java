@@ -2,7 +2,6 @@ package core.legacy;
 import particles.Particle;
 import core.Camera;
 import core.console.Letterboxing;
-import core.console.transitions.Transition;
 import core.gameObjects.EntityMotherList;
 import core.physics.Point;
 
@@ -27,7 +26,7 @@ public class LegacyWorld{
 	//because of some concurrent modification exceptions, the 
 	//game will only call restart at the end of update(); 
 	boolean readyToRestart;
-	Transition currentTransition = null;
+	//Transition currentTransition = null;
 	Letterboxing letterboxing;
 	
 	//pausing prevents updating. halting prevents new drawing.

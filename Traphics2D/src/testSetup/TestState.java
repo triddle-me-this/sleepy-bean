@@ -1,4 +1,4 @@
-package core.testSetup;
+package testSetup;
 
 import core.console.cartridge.gameState.GameState;
 import graphics.AdvancedGraphics;

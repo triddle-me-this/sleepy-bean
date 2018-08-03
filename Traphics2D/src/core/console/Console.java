@@ -25,8 +25,8 @@ import core.console.cartridge.Cartridge;
 import core.console.transitions.Swappable;
 import core.console.transitions.Transition;
 import core.physics.Point;
-import core.testSetup.Main;
 import graphics.AdvancedGraphics;
+import testSetup.Main;
 
 public class Console extends Swappable implements MouseListener, MouseMotionListener, KeyListener, Drawable, Updateable{
 

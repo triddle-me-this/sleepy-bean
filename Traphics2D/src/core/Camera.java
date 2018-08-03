@@ -4,8 +4,8 @@ import java.awt.Color;
 
 import core.physics.Point;
 import core.physics.Vector;
-import core.testSetup.Main;
 import graphics.AdvancedGraphics;
+import testSetup.Main;
 
 public class Camera {
 

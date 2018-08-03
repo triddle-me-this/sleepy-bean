@@ -1,4 +1,4 @@
-package core.testSetup;
+package testSetup;
 
 import java.awt.Color;
 
