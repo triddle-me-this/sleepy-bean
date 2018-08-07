@@ -1,0 +1,6 @@
+package Shooter;
+import core.basicInterfaces.*;
+
+public class Recticle implements Updateable, Drawable{
+
+}

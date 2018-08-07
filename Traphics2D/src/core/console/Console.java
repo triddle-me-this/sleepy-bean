@@ -18,6 +18,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
+import Shooter.Main;
 import core.basicInterfaces.Drawable;
 import core.basicInterfaces.Updateable;
 import core.console.cartridge.CartLib;
@@ -26,7 +27,6 @@ import core.console.transitions.Swappable;
 import core.console.transitions.Transition;
 import core.physics.Point;
 import graphics.AdvancedGraphics;
-import testSetup.Main;
 
 public class Console extends Swappable implements MouseListener, MouseMotionListener, KeyListener, Drawable, Updateable{
 
@@ -81,7 +81,10 @@ public class Console extends Swappable implements MouseListener, MouseMotionList
 		secondsElapsed = 0;
 		frameRate = 0;
 		initialTime = System.currentTimeMillis();
+		
+		
 	}
+	
 	
 	public static void insertCartridge(Cartridge cartridge){
 		currentCartridge = cartridge;
@@ -363,6 +366,8 @@ public class Console extends Swappable implements MouseListener, MouseMotionList
 	@Override
 	public void mouseDragged(MouseEvent event) {
 		//Currently no use for this method.
+		relativeMouseX = event.getX();
+		relativeMouseY = event.getY();
 	}
 	
 	

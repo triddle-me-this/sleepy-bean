@@ -91,6 +91,13 @@ public class Animation{
 
 	}
 	
+	public void draw(AdvancedGraphics pen, int x, int y, boolean xFlip, boolean yFlip, boolean centered){
+		int cX = x-getCurrentFrame().getWidth()/2;
+		int cY = y-getCurrentFrame().getHeight()/2;
+		
+		draw(pen, cX, cY, xFlip, yFlip);
+	}
+	
 	public int getNumFrames(){
 		return numFrames;
 	}

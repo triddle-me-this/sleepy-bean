@@ -7,7 +7,7 @@ import core.gameObjects.EntityMotherList;
 
 public abstract class GameState extends Swappable implements Updateable, Drawable{
 
-	EntityMotherList entityStorage;
+	protected EntityMotherList entityStorage;
 	
 	public GameState(){
 		entityStorage = new EntityMotherList();

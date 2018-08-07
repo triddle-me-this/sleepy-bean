@@ -1,8 +1,11 @@
 package graphics.display;
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.GridBagLayout;
+import java.awt.Point;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
@@ -27,7 +30,7 @@ public class GameWindow {
 	static boolean FULLSCREEN;
 	
 	public GameWindow(int gameWidth, int gameHeight, int gameScale, int frameRate, Color background, 
-			String soundPath, String imagePath, Cartridge initCart, boolean fullScreen){
+			String soundPath, String imagePath, Cartridge initCart, boolean fullScreen, boolean cursor){
 		
 		GAME_SCALE = gameScale;
 		GAME_WIDTH = gameWidth;
@@ -68,6 +71,15 @@ public class GameWindow {
 		mainFrame.setIconImage(Console.getImage("window/", "icon.png"));
 		
 		mainFrame.setVisible(true);
+		
+		if (!cursor){
+			// Transparent 16 x 16 pixel cursor image.
+			BufferedImage cursorImg = new BufferedImage(16, 16, BufferedImage.TYPE_INT_ARGB);
+			Cursor blankCursor = Toolkit.getDefaultToolkit().createCustomCursor(cursorImg, new Point(0, 0), "blank cursor");
+	
+			// Set the blank cursor to the JFrame.
+			mainFrame.getContentPane().setCursor(blankCursor);
+		}
 	}	
 	
 	public static void pack(){

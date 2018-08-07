@@ -10,7 +10,6 @@ import core.animation.AnimationFactory;
 import core.console.Console;
 import core.gameObjects.entities.Entity;
 import core.gameObjects.entities.activeEntities.ActiveEntity;
-import core.gameObjects.entities.activeEntities.Enemy;
 import core.physics.Point;
 import core.physics.Vector;
 import graphics.AdvancedGraphics;
@@ -239,13 +238,13 @@ public class LegacyPlayer extends ActiveEntity{
 			}
 			
 			//Touching enemies
-			for (Entity enemyEntity: world.entityStorage.getSubList("enemies").getEntityList()){
+/*			for (Entity enemyEntity: world.entityStorage.getSubList("enemies").getEntityList()){
 				Enemy enemy = (Enemy)enemyEntity;
 				if (collidesWith(enemy)&&(!enemy.isDead())){
 						if (!Console.isKeyPressed(GOD_KEY))
 							death();
 					}
-				}
+				}*/
 			//Falling off the map
 			/*
 			int mapHeight = world.currentMapHeight * world.currentTileHeight;

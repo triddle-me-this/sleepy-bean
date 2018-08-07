@@ -1,0 +1,149 @@
+package core.gameObjects.entities.activeEntities;
+
+import java.awt.Color;
+import java.util.HashMap;
+
+import core.animation.Animation;
+import core.animation.AnimationFactory;
+import core.console.Console;
+import core.physics.Point;
+import core.physics.Vector;
+import graphics.AdvancedGraphics;
+
+public class Player extends ActiveEntity{
+
+	final static double MAX_MOVE_SPEED = 2.0;
+	//As actual velocity added
+	final static double MOVE_ACC = .5;
+	//As a fraction of velocity on previous frame.
+	final static double MOVE_DCC = .65;
+	
+	HashMap<String, Animation> animationTable;
+	Animation currentAnimation;
+	
+	boolean faceRight;
+	boolean faceUp;
+
+	
+	public Player(int x, int y, int width, int height) {
+		super(x, y, width, height);
+		
+		animationTable = new HashMap<String, Animation>();
+		loadAnimations();
+		
+		currentAnimation = animationTable.get("idle");
+		
+		faceRight = true;
+		faceUp = true;
+		
+	}
+	
+	public void loadAnimations(){
+		
+		Animation frontRun = AnimationFactory.createAnimation(Console.getImage("player/", "spr_frontRun.png"), 13, 24, 5, true);
+		animationTable.put("frontRun", frontRun);
+		
+		Animation backRun = AnimationFactory.createAnimation(Console.getImage("player/", "spr_backRun.png"), 13, 24, 5, true);
+		animationTable.put("backRun", backRun);
+		
+		Animation idle = AnimationFactory.createAnimation(Console.getImage("player/", "spr_frontIdle.png"), 9, 24, 1, false);
+		animationTable.put("idle", idle);
+	}
+		
+	@Override
+	public void update() {
+		
+		boolean upPress = Console.isKeyPressed('w');
+		boolean leftPress = Console.isKeyPressed('a');
+		boolean downPress = Console.isKeyPressed('s');
+		boolean rightPress = Console.isKeyPressed('d');
+		
+		Vector acceleration = new Vector(0, 0);
+		
+		if (upPress){
+			velocity.addY(-1);
+		}
+		if (leftPress){
+			velocity.addX(-1);
+		}
+		if (downPress){
+			velocity.addY(1);
+		}
+		if (rightPress){
+			velocity.addX(1);
+		}
+		
+		acceleration.setLength(MOVE_ACC);
+		velocity.add(acceleration);
+		velocity.limit(MAX_MOVE_SPEED);
+		
+		if ((!upPress)&&(!leftPress)&&(!rightPress)&&(!downPress)){
+			velocity.multiply(MOVE_DCC);
+		}
+		
+		if (velocity.getLength()<=.1){
+			velocity.setLength(0);
+		}
+		
+		location.move(velocity);
+		
+
+		//Animation 
+		
+		if (velocity.getLength() > 0.0){
+			if (velocity.getIntY() > 0){
+				currentAnimation = animationTable.get("frontRun");
+			}
+			else if (velocity.getIntY() < 0){
+				currentAnimation = animationTable.get("backRun");
+			}
+		}
+		else{
+			currentAnimation = animationTable.get("idle");
+		}
+		
+		if (velocity.getX() >0){
+			faceRight = true;
+		}
+		else if (velocity.getX()<0){
+			faceRight = false;
+		}
+		
+		if (velocity.getY() < 0){
+			faceUp = true;
+		}
+		else if (velocity.getY() > 0){
+			faceUp = false;
+		}
+		
+		
+		currentAnimation.update();
+		
+	}
+
+	@Override
+	public void draw(AdvancedGraphics pen) {
+		pen.setColor(Color.BLUE);
+		pen.drawRect(location.getIntX(), location.getIntY(), width, height);
+		
+		Point alLoc = getAlignedLocation();
+		
+		currentAnimation.draw(pen, alLoc.getIntX(), alLoc.getIntY(), !faceRight, false);		
+	}
+	
+	public Point getAlignedLocation(){
+		int aWidth = currentAnimation.getCurrentFrame().getWidth();
+		int aHeight = currentAnimation.getCurrentFrame().getHeight();
+
+		int xOffset = (width - aWidth)/2;
+		int yOffset = (height - aHeight)-1;
+		
+		if (!faceRight){
+			xOffset +=1;
+		}
+		
+		Point aligned = new Point(location.getIntX() + xOffset, location.getIntY() + yOffset);
+		return aligned;
+	}
+
+}
