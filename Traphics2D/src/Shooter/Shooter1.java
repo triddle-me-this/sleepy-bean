@@ -13,7 +13,7 @@ public class Shooter1 extends GameState{
 	public Shooter1(){
 		player = new Player(0, 0, 10, 10);
 		recticle = new Recticle(Console.getImage("HUD/", "spr_recticle.png"));
-		entityStorage.addQueue(player);
+		entityStorage.addQueue("player", player);
 	}
 	
 	@Override

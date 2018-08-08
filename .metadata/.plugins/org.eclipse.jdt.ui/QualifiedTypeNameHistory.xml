@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.awt.Color"/>
-<fullyQualifiedTypeName name="core.gameObjects.entities.activeEntities.Player"/>
 <fullyQualifiedTypeName name="core.physics.Vector"/>
 <fullyQualifiedTypeName name="java.util.HashMap"/>
 <fullyQualifiedTypeName name="core.animation.Animation"/>
 <fullyQualifiedTypeName name="core.animation.AnimationFactory"/>
-<fullyQualifiedTypeName name="core.physics.Point"/>
-<fullyQualifiedTypeName name="core.console.Console"/>
 <fullyQualifiedTypeName name="java.awt.Cursor"/>
-<fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
 <fullyQualifiedTypeName name="java.awt.Point"/>
+<fullyQualifiedTypeName name="core.basicInterfaces.Updateable"/>
+<fullyQualifiedTypeName name="core.basicInterfaces.Drawable"/>
+<fullyQualifiedTypeName name="core.console.Console"/>
+<fullyQualifiedTypeName name="core.physics.Point"/>
+<fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
+<fullyQualifiedTypeName name="core.gameObjects.entities.activeEntities.Player"/>
+<fullyQualifiedTypeName name="Shooter.weapons.Weapon"/>
+<fullyQualifiedTypeName name="Shooter.weapons.BigPistol"/>
+<fullyQualifiedTypeName name="java.util.Collection"/>
+<fullyQualifiedTypeName name="core.gameObjects.EntityList"/>
+<fullyQualifiedTypeName name="java.awt.Color"/>
 </qualifiedTypeNameHistroy>

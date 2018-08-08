@@ -1,0 +1,36 @@
+package Shooter;
+
+import java.awt.image.BufferedImage;
+
+import core.basicInterfaces.Drawable;
+import core.basicInterfaces.Updateable;
+import core.console.Console;
+import core.physics.Point;
+import graphics.AdvancedGraphics;
+
+public class Weapon implements Updateable, Drawable{
+
+	BufferedImage image;
+	double aimAngle;
+	
+	@Override
+	public void update() {
+		Point mouseLocation = Console.getMousePositionInGamePanel();
+		
+		aimAngle = mouseLocation.vertAngleBetween(Console.getCartLib().getSublistClone("player").get(0).getCenterLocation());
+		
+	}
+
+	@Override
+	public void draw(AdvancedGraphics pen) {
+		pen.drawRotatedImage(image, location, image.getWidth(), image.getHeight(), aimAngle);
+	}
+
+	@Override
+	public void debugDraw(AdvancedGraphics pen) {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+}

@@ -3,6 +3,8 @@ package core.gameObjects.entities.activeEntities;
 import java.awt.Color;
 import java.util.HashMap;
 
+import Shooter.weapons.BigPistol;
+import Shooter.weapons.Weapon;
 import core.animation.Animation;
 import core.animation.AnimationFactory;
 import core.console.Console;
@@ -19,6 +21,8 @@ public class Player extends ActiveEntity{
 	
 	boolean faceRight;
 	boolean faceUp;
+	
+	Weapon currentWeapon;
 
 	
 	public Player(int x, int y, int width, int height) {
@@ -31,6 +35,8 @@ public class Player extends ActiveEntity{
 		
 		faceRight = true;
 		faceUp = true;
+		
+		currentWeapon = new BigPistol(location.getIntX(), location.getIntY(), Console.getImage("weapons/", "spr_bigPistol.png"));
 		
 	}
 	
@@ -103,6 +109,9 @@ public class Player extends ActiveEntity{
 		
 		currentAnimation.update();
 		
+		//weapon
+		currentWeapon.update();
+		
 	}
 
 	@Override
@@ -112,7 +121,10 @@ public class Player extends ActiveEntity{
 		
 		Point alLoc = getAlignedLocation();
 		
-		currentAnimation.draw(pen, alLoc.getIntX(), alLoc.getIntY(), !faceRight, false);		
+		currentAnimation.draw(pen, alLoc.getIntX(), alLoc.getIntY(), !faceRight, false);	
+		
+		//
+		currentWeapon.draw(pen);
 	}
 	
 	public Point getAlignedLocation(){

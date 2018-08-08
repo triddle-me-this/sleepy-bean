@@ -1,6 +1,7 @@
 package core.console.cartridge;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 
 import core.gameObjects.EntityList;
@@ -18,9 +19,15 @@ public class CartLib {
 	
 	public EntityList getSublistClone(String tag){
 		ArrayList<Entity> originalList = (ArrayList<Entity>) cartridge.getCurrentGS().getEntityStorage().getSubList(tag).getEntityList();
-		ArrayList<Entity> readOnly = (ArrayList<Entity>) Collections.unmodifiableCollection(originalList);
+		Collection<Entity> readOnly = Collections.unmodifiableCollection(originalList);
 		
-		return new EntityList(readOnly);
+		ArrayList<Entity> newList = new ArrayList<Entity>();
+		
+		for (Entity e: readOnly){
+			newList.add(e);
+		}
+		
+		return new EntityList(newList);
 	}
 	
 	
