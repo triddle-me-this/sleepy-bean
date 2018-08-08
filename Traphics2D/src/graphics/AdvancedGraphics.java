@@ -391,6 +391,20 @@ public class AdvancedGraphics {
 	
 	public void drawMirroredImage(Image img, Point point, int width, int height, boolean xFlip, boolean yFlip){
 
+		Image mirroredImg = getMirroredImage(img, xFlip, yFlip);
+		drawImage(mirroredImg, (int)point.getX(), (int)point.getY(), width, height, null);
+	}
+	
+	public void drawMirroredImage(Image img, int x, int y, int width, int height, boolean xFlip, boolean yFlip){
+		drawMirroredImage(img, new Point(x,y), width, height, xFlip, yFlip);
+	}
+	
+	public void drawMirroredImage(Image img, int x, int y, boolean xFlip, boolean yFlip){
+		drawMirroredImage(img, new Point(x,y), img.getWidth(null), img.getHeight(null), xFlip, yFlip);
+	}
+	
+	public Image getMirroredImage(Image img, boolean xFlip, boolean yFlip){
+
 		// Flip the image horizontally
 		AffineTransform tx;
 		
@@ -407,38 +421,25 @@ public class AdvancedGraphics {
 			tx.translate(-img.getWidth(null), -img.getHeight(null));
 		}
 		else{
-			drawImage(img, (int)point.getX(), (int)point.getY(), width, height, null);
-			return;
+			return img;
 		}
-		
 		
 		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 		img = op.filter((BufferedImage) img, null);
-		
-		drawImage(img, (int)point.getX(), (int)point.getY(), width, height, null);
+		return img;
 	}
-	
-	public void drawMirroredImage(Image img, int x, int y, int width, int height, boolean xFlip, boolean yFlip){
-		drawMirroredImage(img, new Point(x,y), width, height, xFlip, yFlip);
-	}
-	
-	public void drawMirroredImage(Image img, int x, int y, boolean xFlip, boolean yFlip){
-		drawMirroredImage(img, new Point(x,y), img.getWidth(null), img.getHeight(null), xFlip, yFlip);
-	}
-	
 
-
-	
 	public void drawRotatedImage(Image image, Point point, int width, int height, int rotation){
 		
 		double rotationRequired = Math.toRadians(rotation);
 		double locationX = image.getWidth(null) / 2;
 		double locationY = image.getHeight(null) / 2;
 		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
-		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
 		drawImage(op.filter((BufferedImage) image, null), point, width, height);
 	}
+	
 	
 	public void drawLine(int x1, int y1, int x2, int y2) {
 		myPen.drawLine(x1, y1, x2, y2);

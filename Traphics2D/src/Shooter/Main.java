@@ -9,9 +9,9 @@ import graphics.display.GameWindow;
 
 public class Main {
 	
-	public final static int WIDTH = 320;
-	public final static int HEIGHT = 180;
-	public final static int SCALE = 3;
+	public final static int WIDTH = 640;
+	public final static int HEIGHT = 360;
+	public final static int SCALE = 2;
 	public final static boolean FULLSCREEN = false;
 	public final static int FRAME_RATE = 60;
 	

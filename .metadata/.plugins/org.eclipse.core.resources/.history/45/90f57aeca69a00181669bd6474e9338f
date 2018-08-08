@@ -1,0 +1,63 @@
+package Shooter.weapons;
+
+import java.awt.Color;
+import java.awt.image.BufferedImage;
+
+import core.basicInterfaces.Drawable;
+import core.basicInterfaces.Updateable;
+import core.console.Console;
+import core.gameObjects.EntityList;
+import core.gameObjects.entities.activeEntities.Player;
+import core.physics.Point;
+import graphics.AdvancedGraphics;
+
+public abstract class Weapon{
+
+	Point location;
+	Point target;
+	
+	BufferedImage image;
+	double aimAngle;
+	
+	public Weapon(int x, int y, BufferedImage image){
+		
+		location = new Point(x, y);
+		target = new Point(0,0);
+		
+		this.image = image;
+	}
+	
+	public void update(Point location) {
+		//update with new location
+		this.location = location;
+		
+		//Determine target location
+		Point mouse = Console.getMousePositionInGamePanel();
+		
+		int x = mouse.getIntX()/3;
+		int y = mouse.getIntY()/3;
+		
+		target = new Point(x,y);
+		
+		//determine aim angle
+		aimAngle = Math.toDegrees(location.horAngleBetween(target));
+		if (target.getIntX() <= location.getIntX()){
+			aimAngle += 180;
+		}
+
+		
+	}
+
+	public void draw(AdvancedGraphics pen) {
+		pen.setColor(Color.RED);
+		
+		pen.drawRotatedImage(image, new Point(location.getIntX() + 15, location.getIntY()+15), image.getWidth(), image.getHeight(), (int)aimAngle);
+		pen.drawCircle(location.getIntX(), location.getIntY(), 3);
+		
+		pen.drawCircle(target.getIntX(), target.getIntY(), 3);
+		
+	}
+
+
+
+}

@@ -19,8 +19,8 @@ public class Recticle implements Updateable, Drawable{
 	public void update() {
 		location = Console.getMousePositionInGamePanel();
 		
-		int x = location.getIntX()/3 - image.getWidth()/2;
-		int y = location.getIntY()/3 - image.getHeight()/2;
+		int x = location.getIntX()/Main.SCALE - image.getWidth()/2;
+		int y = location.getIntY()/Main.SCALE - image.getHeight()/2;
 		
 		location = new Point(x,y);
 		
