@@ -3,8 +3,8 @@ package core.gameObjects.entities.activeEntities;
 import java.awt.Color;
 import java.util.HashMap;
 
-import Shooter.Main;
 import Shooter.weapons.BigPistol;
+import Shooter.weapons.HeroSword;
 import Shooter.weapons.Weapon;
 import core.animation.Animation;
 import core.animation.AnimationFactory;
@@ -12,6 +12,7 @@ import core.console.Console;
 import core.physics.Point;
 import core.physics.Vector;
 import graphics.AdvancedGraphics;
+import Shooter.Main;
 
 public class Player extends ActiveEntity{
 
@@ -50,7 +51,7 @@ public class Player extends ActiveEntity{
 		torsoRight = true;
 		torsoUp = true;
 		
-		currentWeapon = new BigPistol(location.getIntX(), location.getIntY(), Console.getImage("weapons/", "spr_bigPistol.png"));
+		currentWeapon = new BigPistol(location.getIntX(), location.getIntY());
 		
 	}
 	
@@ -91,6 +92,8 @@ public class Player extends ActiveEntity{
 		boolean leftPress = Console.isKeyPressed('a');
 		boolean downPress = Console.isKeyPressed('s');
 		boolean rightPress = Console.isKeyPressed('d');
+		
+		boolean leftMouse = Console.isMousePressed(1);
 		
 		velocity = new Vector(0,0);
 		
@@ -173,8 +176,12 @@ public class Player extends ActiveEntity{
 		legsAnimation.update();
 		torsoAnimation.update();
 		
-		//weapon
+		//weapon -----------------
 		currentWeapon.update(getCenterLocation());
+		
+		if (leftMouse){
+			currentWeapon.attemptFire();
+		}
 		
 	}
 
@@ -191,17 +198,19 @@ public class Player extends ActiveEntity{
 		Point TLoc = getAlignedTorsoLocation();
 		
 		//determine draw order. -------------------		
-		Point mouse = Console.getMousePositionInGamePanel();
-		int mY = mouse.getIntY()/Main.SCALE;
+		//Point mouse = Console.getMousePositionInGamePanel();
+		//int mY = mouse.getIntY()/Main.SCALE;
 		
-		if (mY < getCenterLocation().getIntY()){
-			currentWeapon.draw(pen);
+		double wepAng = currentWeapon.getDrawAngle();
+		
+		if (wepAng > 0 && wepAng <= 180){
 			legsAnimation.draw(pen, LLoc.getIntX(), LLoc.getIntY(), !legsRight, false);
 			torsoAnimation.draw(pen, TLoc.getIntX(), TLoc.getIntY(), !torsoRight, false);
+			currentWeapon.draw(pen);
 		}
 		else{
-			legsAnimation.draw(pen, LLoc.getIntX(), LLoc.getIntY(), !legsRight, false);
 			currentWeapon.draw(pen);
+			legsAnimation.draw(pen, LLoc.getIntX(), LLoc.getIntY(), !legsRight, false);
 			torsoAnimation.draw(pen, TLoc.getIntX(), TLoc.getIntY(), !torsoRight, false);
 			
 		}

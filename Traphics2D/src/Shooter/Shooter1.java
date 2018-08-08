@@ -34,7 +34,6 @@ public class Shooter1 extends GameState{
 	public void debugDraw(AdvancedGraphics pen) {
 		entityStorage.debugDraw(pen);
 		recticle.debugDraw(pen);
-		
 	}
 
 }

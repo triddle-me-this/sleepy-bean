@@ -429,15 +429,36 @@ public class AdvancedGraphics {
 		return img;
 	}
 
-	public void drawRotatedImage(Image image, Point point, int width, int height, int rotation){
+	public void drawRotatedImage(BufferedImage image, Point point, int rotX, int rotY, int rotation){
 		
 		double rotationRequired = Math.toRadians(rotation);
-		double locationX = image.getWidth(null) / 2;
-		double locationY = image.getHeight(null) / 2;
-		AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, locationX, locationY);
-		AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+		//rotation about the center of the image
+		
+		//
+		//AffineTransform tx = AffineTransform.getRotateInstance(rotationRequired, rotX, rotY);
+		//AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
 
-		drawImage(op.filter((BufferedImage) image, null), point, width, height);
+		BufferedImage rotated = new BufferedImage(image.getHeight(), image.getWidth(), image.getType());
+		
+		AffineTransform transform = new AffineTransform();
+		transform.rotate(rotationRequired, rotX, rotY);
+		
+		double offset = (image.getWidth()-image.getHeight())/2;
+		transform.translate(offset,offset);
+
+		AffineTransformOp op = new AffineTransformOp(transform, AffineTransformOp.TYPE_NEAREST_NEIGHBOR);
+		op.filter(image, rotated);
+		
+		//BufferedImage rotated = op.createCompatibleDestImage(image, image.getColorModel());
+		//rotated = op.filter((BufferedImage) image, rotated);
+		
+		drawImage(rotated, point, rotated.getWidth(), rotated.getHeight());
+	}
+	
+	//rotates about center by default
+	public void drawRotatedImage(BufferedImage image, Point point, int rotation){
+		
+		drawRotatedImage(image, point,  image.getWidth(null)/2, image.getHeight(null)/2, rotation);
 	}
 	
 	

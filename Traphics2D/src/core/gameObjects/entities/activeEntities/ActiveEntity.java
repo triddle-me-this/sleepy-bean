@@ -32,57 +32,57 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 	
 	
 	//Override these methods.  -------------------
-	public void downCollision(LegacyWorld world, Entity collider){}
+	public void downCollision(Entity collider){}
 	
-	public void upCollision(LegacyWorld world, Entity collider){}
+	public void upCollision(Entity collider){}
 	
-	public void rightCollision(LegacyWorld world, Entity collider){}
+	public void rightCollision(Entity collider){}
 	
-	public void leftCollision(LegacyWorld world, Entity collider){}
+	public void leftCollision(Entity collider){}
 	//-----------------------------------------
 	
 	//Moves the ActiveEntity by the components of the given vector.
-	public void move(LegacyWorld world, List<Entity> solidEntityList, Vector vector){
+	public void move(List<Entity> solidEntityList, Vector vector){
 		int moveX = vector.getIntX();
 		int moveY = vector.getIntY();
 		
-		move(world, solidEntityList, moveX, moveY);
+		move(solidEntityList, moveX, moveY);
 	}
 	
 	//Moves the ActiveEntity horizontally and vertically by the given amount.
-	public void move(LegacyWorld world, List<Entity> solidEntityList, int xDist, int yDist){
-		moveHorizontal(world, solidEntityList, xDist);
-		moveVertical(world, solidEntityList, yDist);
+	public void move(List<Entity> solidEntityList, int xDist, int yDist){
+		moveHorizontal(solidEntityList, xDist);
+		moveVertical(solidEntityList, yDist);
 	}
 	
 	//Moves the ActiveEntity Horizontally by the given amount.
-	public void moveHorizontal(LegacyWorld world, List<Entity> solidEntityList, int dist){
+	public void moveHorizontal(List<Entity> solidEntityList, int dist){
 		if (dist>0){
-			moveRight(world, solidEntityList, dist, true);
+			moveRight(solidEntityList, dist, true);
 		}
 		else if (dist<0){
-			moveLeft(world, solidEntityList, -1*dist, true);
+			moveLeft(solidEntityList, -1*dist, true);
 		}
 	}
 	
 	//Moves the ActiveEntity Vertically by the given amount.
-	public void moveVertical(LegacyWorld world, List<Entity> solidEntityList, int dist){
+	public void moveVertical(List<Entity> solidEntityList, int dist){
 		if (dist >0){
-			moveDown(world, solidEntityList, dist, true);
+			moveDown(solidEntityList, dist, true);
 		}
 		if (dist<0){
-			moveUp(world, solidEntityList, -1*dist, true);
+			moveUp(solidEntityList, -1*dist, true);
 		}
 	}
 	
 	//Moves the ActiveEntity right by the given amount.
 	//see moveLeft for documentation clarification
-	public boolean moveRight(LegacyWorld world, List<Entity> solidEntityList, int dist, boolean actuallyMove){
+	public boolean moveRight(List<Entity> solidEntityList, int dist, boolean actuallyMove){
 		
 		boolean collision = false;
 		
 		int moveAmount = dist;
-		ArrayList<Integer> intRows = getIntRows(world);
+		ArrayList<Integer> intRows = getIntRows();
 		//The received intRows are correct.
 		
 		int colPoint = (int)location.getX() + width;
@@ -111,7 +111,7 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 		if ((int)minDist < moveAmount){
 			collision = true;
 			if (actuallyMove)
-				rightCollision(world, closestBlock);
+				rightCollision(closestBlock);
 		}
 		
 		moveAmount = getMin((int)minDist, moveAmount);
@@ -125,12 +125,12 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 	//actually move determines if the entity actually moves.
 	//Because these functions can be used to find if a collision WOULD happen, this boolean argument
 	//is used when testing for hypothetical collisions.
-	public boolean moveLeft(LegacyWorld world, List<Entity> solidEntityList, int dist, boolean actuallyMove){
+	public boolean moveLeft(List<Entity> solidEntityList, int dist, boolean actuallyMove){
 		
 		boolean collision = false;
 		
 		int moveAmount = dist;
-		ArrayList<Integer> intRows = getIntRows(world);
+		ArrayList<Integer> intRows = getIntRows();
 		//The received intRows are correct.
 		
 		int colPoint = (int)location.getX();
@@ -159,7 +159,7 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 		if ((int)minDist < moveAmount){
 			collision = true;
 			if (actuallyMove)
-				leftCollision(world, closestBlock);
+				leftCollision(closestBlock);
 			
 		}
 		
@@ -171,12 +171,12 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 	}
 	
 	//Moves the ActiveEntity down by the given amount.
-	public boolean moveDown(LegacyWorld world, List<Entity> solidEntityList, int dist, boolean actuallyMove){
+	public boolean moveDown(List<Entity> solidEntityList, int dist, boolean actuallyMove){
 		
 		boolean collision = false;
 		
 		int moveAmount = dist;
-		ArrayList<Integer> intCols = getIntCols(world);
+		ArrayList<Integer> intCols = getIntCols();
 		
 		int colPoint = (int)(location.getY() + height);
 		
@@ -204,7 +204,7 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 		if ((int)minDist < moveAmount){
 			collision = true;
 			if (actuallyMove)
-				downCollision(world, closestBlock);
+				downCollision(closestBlock);
 			
 		}
 		
@@ -216,12 +216,12 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 	}
 	
 	//Moves the ActiveEntity up by the given amount.
-	public boolean moveUp(LegacyWorld world, List<Entity> solidEntityList, int dist, boolean actuallyMove){
+	public boolean moveUp(List<Entity> solidEntityList, int dist, boolean actuallyMove){
 		
 		boolean collision = false;
 		
 		int moveAmount = dist;
-		ArrayList<Integer> intCols = getIntCols(world);
+		ArrayList<Integer> intCols = getIntCols();
 		
 		int colPoint = (int)(location.getY());
 		
@@ -249,7 +249,7 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 		if ((int)minDist < moveAmount){
 			collision = true;
 			if (actuallyMove)
-				upCollision(world, closestBlock);
+				upCollision(closestBlock);
 			
 		}
 		
@@ -277,7 +277,7 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 	
 	
 	//Calculates which horizontal rows are intersected by the ActiveEntity.
-	private ArrayList<Integer> getIntRows(LegacyWorld world){
+	private ArrayList<Integer> getIntRows(){
 		
 		ArrayList<Integer> intRows = new ArrayList<Integer>();
 		
@@ -323,7 +323,7 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 
 	
 	//calculates which vertical rows are intersected by the ActiveEntity.
-	private ArrayList<Integer> getIntCols(LegacyWorld world){
+	private ArrayList<Integer> getIntCols(){
 		
 
 		ArrayList<Integer> intCols = new ArrayList<Integer>();

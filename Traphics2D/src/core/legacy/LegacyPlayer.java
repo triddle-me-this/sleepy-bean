@@ -134,7 +134,7 @@ public class LegacyPlayer extends ActiveEntity{
 			//add gravity and move the player such that they enter the grounded state immediately.
 			velocity.add(gravity);
 			List<Entity> solidList = getSolidList();
-			this.moveVertical(world, solidList, (int)velocity.getY());
+			//this.moveVertical(world, solidList, (int)velocity.getY());
 			
 			touchGround(world);
 		}
@@ -453,8 +453,8 @@ public class LegacyPlayer extends ActiveEntity{
 		
 		List<Entity> solidList = getSolidList();
 		
-		this.moveHorizontal(world, solidList, (int)velocity.getX());
-		this.moveVertical(world, solidList, (int)velocity.getY());
+		//this.moveHorizontal(world, solidList, (int)velocity.getX());
+		//this.moveVertical(world, solidList, (int)velocity.getY());
 		
 	}
 	
@@ -542,7 +542,7 @@ public class LegacyPlayer extends ActiveEntity{
 		velocity.setY(0);
 	}
 	
-	@Override
+/*	@Override
 	public void upCollision(LegacyWorld world, Entity collider){
 		if (flipped){
 			touchGround(world);
@@ -550,9 +550,9 @@ public class LegacyPlayer extends ActiveEntity{
 		else
 			touchCeiling(world);
 			
-	}
+	}*/
 	
-	@Override
+/*	@Override
 	public void downCollision(LegacyWorld world, Entity collider){
 		if (flipped){
 			touchCeiling(world);
@@ -560,7 +560,7 @@ public class LegacyPlayer extends ActiveEntity{
 		else
 			touchGround(world);
 		
-	}
+	}*/
 	
 /*	@Override
 	public void rightCollision(LegacyWorld world, Entity collider){
@@ -576,10 +576,10 @@ public class LegacyPlayer extends ActiveEntity{
 		//collider.highlight();
 	}
 	*/
-	@Override
+/*	@Override
 	public void leftCollision(LegacyWorld world, Entity collider){
 		velocity.setX(0);
-	}
+	}*/
 	//------------------------------------------
 
 	//Draws actual appearance of the player.

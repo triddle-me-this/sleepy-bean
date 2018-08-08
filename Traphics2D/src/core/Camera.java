@@ -2,10 +2,10 @@ package core;
 
 import java.awt.Color;
 
-import Shooter.Main;
 import core.physics.Point;
 import core.physics.Vector;
 import graphics.AdvancedGraphics;
+import Shooter.Main;
 
 public class Camera {
 

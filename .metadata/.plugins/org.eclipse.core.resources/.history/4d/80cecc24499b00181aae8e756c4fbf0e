@@ -1,0 +1,12 @@
+package Shooter.weapons;
+
+
+import core.console.Console;
+
+public class HeroSword extends Weapon{
+
+	public HeroSword(int x, int y) {
+		super(x, y, Console.getImage("weapons/", "wep_heroSword.png"));
+	}
+
+}

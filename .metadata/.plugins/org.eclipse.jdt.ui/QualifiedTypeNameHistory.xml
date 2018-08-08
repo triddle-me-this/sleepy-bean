@@ -7,7 +7,6 @@
 <fullyQualifiedTypeName name="java.awt.Point"/>
 <fullyQualifiedTypeName name="core.basicInterfaces.Updateable"/>
 <fullyQualifiedTypeName name="core.basicInterfaces.Drawable"/>
-<fullyQualifiedTypeName name="core.console.Console"/>
 <fullyQualifiedTypeName name="core.physics.Point"/>
 <fullyQualifiedTypeName name="java.awt.image.BufferedImage"/>
 <fullyQualifiedTypeName name="core.gameObjects.entities.activeEntities.Player"/>
@@ -19,4 +18,6 @@
 <fullyQualifiedTypeName name="java.lang.System"/>
 <fullyQualifiedTypeName name="core.physics.Vector"/>
 <fullyQualifiedTypeName name="Shooter.Main"/>
+<fullyQualifiedTypeName name="core.console.Console"/>
+<fullyQualifiedTypeName name="Shooter.weapons.HeroSword"/>
 </qualifiedTypeNameHistroy>
