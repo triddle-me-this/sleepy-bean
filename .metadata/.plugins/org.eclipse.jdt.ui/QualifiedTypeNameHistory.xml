@@ -16,8 +16,11 @@
 <fullyQualifiedTypeName name="core.gameObjects.EntityList"/>
 <fullyQualifiedTypeName name="java.awt.Color"/>
 <fullyQualifiedTypeName name="java.lang.System"/>
-<fullyQualifiedTypeName name="core.physics.Vector"/>
 <fullyQualifiedTypeName name="Shooter.Main"/>
 <fullyQualifiedTypeName name="core.console.Console"/>
 <fullyQualifiedTypeName name="Shooter.weapons.HeroSword"/>
+<fullyQualifiedTypeName name="particles.SmokeParticle"/>
+<fullyQualifiedTypeName name="particles.MuzzleFlash"/>
+<fullyQualifiedTypeName name="core.physics.Vector"/>
+<fullyQualifiedTypeName name="java.util.Random"/>
 </qualifiedTypeNameHistroy>

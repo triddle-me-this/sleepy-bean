@@ -24,6 +24,8 @@ public abstract class Weapon implements WeaponInterface{
 	double aimAngle;
 	//changes WHERE the weapon is held, not what it looks like
 	double angleOffset;
+	//change in angle due to animation (sword swing)
+	double swingOffset;
 	
 	//distance held away from the player
 	double holdDistance;
@@ -56,6 +58,7 @@ public abstract class Weapon implements WeaponInterface{
 		xOffset = xOff;
 		yOffset = yOff;
 		angleOffset = angOff;
+		swingOffset = 0;
 		
 		muzzleLocation = new Point(x, y);
 	}
@@ -78,7 +81,9 @@ public abstract class Weapon implements WeaponInterface{
 			if (recoilCount >= recoilTime){
 				fireable = true;
 			}
-		}		
+		}	
+		
+		weaponUpdate();
 	}
 	
 	public void aimWeapon(Point target){
@@ -106,12 +111,14 @@ public abstract class Weapon implements WeaponInterface{
 		Vector weaponOffset = location.makeVector(target);
 		
 		//apply angular offset-------------
-		double theta = Math.atan(weaponOffset.getY() / weaponOffset.getX());
+		double theta = Math.toDegrees(Math.atan(weaponOffset.getY() / weaponOffset.getX()));
 		theta += angleOffset;
-	
+		theta += swingOffset;
 		
-		double newX = Math.cos(theta);
-		double newY = Math.sin(theta);
+		double theta2 = Math.toRadians(theta);
+		
+		double newX = Math.cos(theta2);
+		double newY = Math.sin(theta2);
 		
 		if (weaponOffset.getX()<0){
 			newX *=-1;
@@ -124,6 +131,9 @@ public abstract class Weapon implements WeaponInterface{
 		Point muzzle = new Point(location.getX(), location.getY());
 		muzzle.move(offset);
 		
+		muzzle.moveX(xOffset);
+		muzzle.moveY(yOffset);
+		
 		return muzzle;
 	}
 	
@@ -132,12 +142,14 @@ public abstract class Weapon implements WeaponInterface{
 		Vector weaponOffset = location.makeVector(target);
 		
 		//apply angular offset-------------
-		double theta = Math.atan(weaponOffset.getY() / weaponOffset.getX());
+		double theta = Math.toDegrees(Math.atan(weaponOffset.getY() / weaponOffset.getX()));
 		theta += angleOffset;
+		theta += swingOffset;
 	
+		double theta2 = Math.toRadians(theta);
 		
-		double newX = Math.cos(theta);
-		double newY = Math.sin(theta);
+		double newX = Math.cos(theta2);
+		double newY = Math.sin(theta2);
 		
 		if (weaponOffset.getX()<0){
 			newX *=-1;
@@ -162,7 +174,7 @@ public abstract class Weapon implements WeaponInterface{
 	//angle at which the weapon is drawn at (for draw order with player)
 	public double getDrawAngle(){
 		
-		double ang = aimAngle + angleOffset;
+		double ang = aimAngle + angleOffset + swingOffset;
 		return normalizeAngle(ang);
 		
 	}

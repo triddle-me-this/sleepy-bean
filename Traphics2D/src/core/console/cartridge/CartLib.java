@@ -30,5 +30,9 @@ public class CartLib {
 		return new EntityList(newList);
 	}
 	
+	public void addEntity(Entity e){
+		cartridge.getCurrentGS().getEntityStorage().addQueue(e);
+	}
+	
 	
 }

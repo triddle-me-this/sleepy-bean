@@ -51,7 +51,7 @@ public class Player extends ActiveEntity{
 		torsoRight = true;
 		torsoUp = true;
 		
-		currentWeapon = new BigPistol(location.getIntX(), location.getIntY());
+		currentWeapon = new HeroSword(location.getIntX(), location.getIntY());
 		
 	}
 	
@@ -116,7 +116,7 @@ public class Player extends ActiveEntity{
 		}
 		
 		velocity.setLength(MAX_MOVE_SPEED);
-		location.move(velocity);
+		move(Console.getCartLib().getSublistClone("solid").getEntityList(), velocity);
 		
 		//Animation 
 		String LA;

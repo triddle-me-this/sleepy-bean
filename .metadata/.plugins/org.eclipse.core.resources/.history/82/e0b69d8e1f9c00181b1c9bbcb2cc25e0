@@ -1,0 +1,40 @@
+package particles;
+
+import java.awt.Color;
+import java.util.Random;
+
+import core.physics.Vector;
+import graphics.AdvancedGraphics;
+
+public class MuzzleFlash extends Particle {
+
+	public final static double SPEED = 0.0;
+	public final static int DEPTH = 0;
+	public final static double SIZE = 10;
+	public final static Color COLOR = Color.ORANGE;
+	public final static Vector GRAVITY = new Vector(0,0);
+	
+	public MuzzleFlash(int x, int y) {
+		super(x, y, SPEED, SIZE, DEPTH, COLOR, GRAVITY);
+		this.size = SIZE;
+	}
+	
+	
+	@Override
+	public void draw(AdvancedGraphics pen){
+		
+		Random random = new Random();
+		
+		
+		
+		if (timer < 2){
+			pen.setColor(getColor());
+			pen.fillTriangle(location.getIntX(), location.getIntY(), random.nextInt(360), getSize());
+			pen.setColor(Color.RED);
+			pen.fillTriangle(location.getIntX(), location.getIntY(), random.nextInt(360), getSize());
+		}
+		
+
+	}
+
+}
