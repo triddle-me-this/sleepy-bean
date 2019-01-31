@@ -1,0 +1,87 @@
+package core.animation;
+
+import java.util.HashMap;
+
+import core.console.Console;
+
+public class CostumeSet {
+	
+	String costumeName;
+
+	HashMap<String, Animation> headAnimations;
+	HashMap<String, Animation> torsoAnimations;
+	HashMap<String, Animation> legsAnimations;
+
+	
+	public CostumeSet(String costumeName){
+		headAnimations = new HashMap<String, Animation>();
+		torsoAnimations = new HashMap<String, Animation>();
+		legsAnimations = new HashMap<String, Animation>();
+		
+		this.costumeName = costumeName;
+		
+		loadHeadAnimations();
+		loadTorsoAnimations();
+		LoadLegsAnimations();
+	}
+	
+	//Accepted tags are "backIdle, frontIdle, backRun, frontRun"
+	public Animation getHeadAnimation(String tag){
+		return headAnimations.get(tag);
+	}
+	
+	public Animation getTorsoAnimation(String tag){
+		return torsoAnimations.get(tag);
+	}
+	
+	public Animation getLegsAnimation(String tag){
+		return legsAnimations.get(tag);
+	}
+	
+	public void loadHeadAnimations(){
+		
+		Animation frontRun = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/head/", "head_frontRun.png"), 13, 24, 5, true);
+		headAnimations.put("frontRun", frontRun);
+		
+		Animation backRun = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/head/", "head_backRun.png"), 13, 24, 5, true);
+		headAnimations.put("backRun", backRun);
+		
+		Animation idle = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/head/", "head_frontIdle.png"), 9, 24, 1, false);
+		headAnimations.put("frontIdle", idle);
+		
+		Animation backIdle = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/head/", "head_backIdle.png"), 11, 24, 1, false);
+		headAnimations.put("backIdle", backIdle);
+	}
+	
+	public void loadTorsoAnimations(){
+		
+		Animation frontRun = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/torso/", "torso_frontRun.png"), 13, 24, 5, true);
+		torsoAnimations.put("frontRun", frontRun);
+		
+		Animation backRun = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/torso/", "torso_backRun.png"), 13, 24, 5, true);
+		torsoAnimations.put("backRun", backRun);
+		
+		Animation idle = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/torso/", "torso_frontIdle.png"), 9, 24, 1, false);
+		torsoAnimations.put("frontIdle", idle);
+		
+		Animation backIdle = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/torso/", "torso_backIdle.png"), 11, 24, 1, false);
+		torsoAnimations.put("backIdle", backIdle);
+	}
+	
+	public void loadLegAnimations(){
+		
+		Animation frontRun = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/legs/", "legs_frontRun.png"), 13, 24, 5, true);
+		legsAnimations.put("frontRun", frontRun);
+		
+		Animation backRun = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/legs/", "legs_backRun.png"), 13, 24, 5, true);
+		legsAnimations.put("backRun", backRun);
+		
+		Animation idle = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/legs/", "legs_frontIdle.png"), 9, 24, 1, false);
+		legsAnimations.put("frontIdle", idle);
+		
+		Animation backIdle = AnimationFactory.createAnimation(Console.getImage("player/" + costumeName + "/legs/", "legs_backIdle.png"), 11, 24, 1, false);
+		legsAnimations.put("backIdle", backIdle);
+	}
+	
+	
+}

@@ -18,8 +18,15 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 	
 	final static double STANDARD_GRAVITY = .32;
 	
+	//"leftover" fractions of a pixel. Useful when speed isn't an integer.
+	double xScrap;
+	double yScrap;
+	
 	public ActiveEntity(int x, int y, int width, int height, boolean solid, int depth, Vector velocity, Vector gravity){
 		super(x,y,width,height,solid, depth, velocity, gravity);
+		
+		xScrap = 0;
+		yScrap = 0;
 	}
 	
 	public ActiveEntity(int x, int y, int width, int height, boolean solid, int depth){
@@ -43,14 +50,29 @@ public abstract class ActiveEntity extends Entity implements Updateable, Drawabl
 	
 	//Moves the ActiveEntity by the components of the given vector.
 	public void move(List<Entity> solidEntityList, Vector vector){
-		int moveX = vector.getIntX();
-		int moveY = vector.getIntY();
+		double dubX = vector.getX();
+		double dubY = vector.getY();
 		
-		move(solidEntityList, moveX, moveY);
+		int intX = vector.getIntX();
+		int intY = vector.getIntY();
+		
+		xScrap += (dubX - intX);
+		yScrap += (dubY - intY);
+		
+		if (Math.abs(xScrap) >= 1){
+			intX += (int)xScrap;
+			xScrap -= ((int)xScrap);
+		}
+		if (Math.abs(yScrap) >=1){
+			intY += (int)yScrap;
+			yScrap -= ((int)yScrap);
+		}
+		
+		moveAligned(solidEntityList, intX, intY);
 	}
 	
 	//Moves the ActiveEntity horizontally and vertically by the given amount.
-	public void move(List<Entity> solidEntityList, int xDist, int yDist){
+	public void moveAligned(List<Entity> solidEntityList, int xDist, int yDist){
 		moveHorizontal(solidEntityList, xDist);
 		moveVertical(solidEntityList, yDist);
 	}

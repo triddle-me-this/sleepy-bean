@@ -30,8 +30,8 @@ import Shooter.Main;
 
 public class Console extends Swappable implements MouseListener, MouseMotionListener, KeyListener, Drawable, Updateable{
 
-	static String soundPath;
-	static String imagePath;
+	public static String soundPath;
+	public static String imagePath;
 	
 	private static int relativeMouseX;
 	private static int relativeMouseY;

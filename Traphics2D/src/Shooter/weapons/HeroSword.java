@@ -16,6 +16,7 @@ public class HeroSword extends Weapon{
 	final static double ANG_OFFSET = -90;
 	
 	boolean swinging;
+	//which direction the swing is going (false is returning to rest)
 	boolean swingOut;
 	
 	public HeroSword(int x, int y) {
@@ -27,15 +28,13 @@ public class HeroSword extends Weapon{
 		System.out.println("Swish!");
 		swinging = true;
 		swingOut = true;
-
-		
 	}
 	
 	public void weaponUpdate(){
 		
 		if (swinging){
 			if (swingOut){
-				swingOffset += .6*(180 -swingOffset);
+				swingOffset += .55*(180 -swingOffset);
 				
 				if (swingOffset >= 179){
 					swingOffset = 180;
