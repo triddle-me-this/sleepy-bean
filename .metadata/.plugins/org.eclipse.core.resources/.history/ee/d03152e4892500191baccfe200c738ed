@@ -11,7 +11,7 @@ public class Main {
 	
 	public final static int WIDTH = 480;
 	public final static int HEIGHT = 270;
-	public final static int SCALE = 3;
+	public final static int SCALE = 2;
 	public final static boolean FULLSCREEN = false;
 	public final static int FRAME_RATE = 60;
 	

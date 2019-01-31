@@ -16,7 +16,7 @@ import Shooter.Main;
 
 public class Player extends ActiveEntity{
 
-	final static double MAX_MOVE_SPEED = 1.0;
+	final static double MAX_MOVE_SPEED = 2.0;
 
 	HashMap<String, CostumeSet> costumes;
 	
