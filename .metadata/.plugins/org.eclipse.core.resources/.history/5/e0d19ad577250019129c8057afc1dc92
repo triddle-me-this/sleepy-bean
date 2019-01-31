@@ -55,7 +55,6 @@ public class Player extends ActiveEntity{
 		
 	}
 	
-	//test
 	public void loadTorsoAnimations(){
 		
 		Animation frontRun = AnimationFactory.createAnimation(Console.getImage("player/torso/", "torso_frontRun.png"), 13, 24, 5, true);
