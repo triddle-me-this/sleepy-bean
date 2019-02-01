@@ -26,6 +26,8 @@ public abstract class Weapon implements WeaponInterface{
 	double angleOffset;
 	//change in angle due to animation (sword swing)
 	double swingOffset;
+	//change in draw angle due to blocking
+	double blockOffset;
 	
 	//distance held away from the player
 	double holdDistance;
@@ -59,6 +61,7 @@ public abstract class Weapon implements WeaponInterface{
 		yOffset = yOff;
 		angleOffset = angOff;
 		swingOffset = 0;
+		blockOffset = 0;
 		
 		muzzleLocation = new Point(x, y);
 	}
@@ -104,8 +107,9 @@ public abstract class Weapon implements WeaponInterface{
 			recoilCount = 0;
 		}
 	}
+
 	
-	//untested.
+	//untested. For muzzle flash effects.
 	public Point getMuzzlePoint(){
 		//Determine the point to draw at--------------
 		Vector weaponOffset = location.makeVector(target);
@@ -137,6 +141,7 @@ public abstract class Weapon implements WeaponInterface{
 		return muzzle;
 	}
 	
+	//where the weapon is actually drawn at.
 	public Point getOffsetPoint(){
 		//Determine the point to draw at--------------
 		Vector weaponOffset = location.makeVector(target);
@@ -145,7 +150,7 @@ public abstract class Weapon implements WeaponInterface{
 		double theta = Math.toDegrees(Math.atan(weaponOffset.getY() / weaponOffset.getX()));
 		theta += angleOffset;
 		theta += swingOffset;
-	
+		
 		double theta2 = Math.toRadians(theta);
 		
 		double newX = Math.cos(theta2);
@@ -171,10 +176,11 @@ public abstract class Weapon implements WeaponInterface{
 		return drawPoint;
 	}
 	
+	//The weapons "orientation" relative to the player
 	//angle at which the weapon is drawn at (for draw order with player)
 	public double getDrawAngle(){
 		
-		double ang = aimAngle + angleOffset + swingOffset;
+		double ang = aimAngle + angleOffset + swingOffset + blockOffset;
 		return normalizeAngle(ang);
 		
 	}
