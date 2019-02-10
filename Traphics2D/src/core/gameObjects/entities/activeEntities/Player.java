@@ -88,6 +88,7 @@ public class Player extends ActiveEntity{
 		boolean rightPress = Console.isKeyPressed('d');
 		
 		boolean leftMouse = Console.isMousePressed(1);
+		boolean rightMouse = Console.isMousePressed(3);
 		
 		velocity = new Vector(0,0);
 		

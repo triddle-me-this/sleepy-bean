@@ -37,6 +37,7 @@ public abstract class Weapon implements WeaponInterface{
 	int recoilCount;
 	boolean fireable;
 	
+
 	//sprite offset for this specific weapon.
 	int xOffset;
 	int yOffset;

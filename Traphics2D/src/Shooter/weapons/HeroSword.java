@@ -18,18 +18,19 @@ public class HeroSword extends Weapon{
 	//the angle over which the weapon is swung
 	final static double SWING_ARC = 180;
 	//weapon moves this much of the swing arc per frame.
-	final static double SWING_SPEED = .55;
+	final static double SWING_SPEED = .5;
 	final static double SWING_RETURN_RATE = 6;
 	
-	final static double WINDUP_SPEED = .05;
-	final static double WINDUP_ARC = 45;
+	final static double WINDUP_SPEED = .3;
+	final static double WINDUP_ARC = 10;
 	
 	//"winding up" preparing to attack
 	boolean windingUp;
-	
 	boolean swinging;
 	//which direction the swing is going (false is returning to rest)
 	boolean swingOut;
+	
+
 	
 	public HeroSword(int x, int y) {
 		super(x, y, Console.getImage("weapons/", "wep_heroSword.png"), HOLD_DISTANCE, RECOIL_TIME, X_OFFSET, Y_OFFSET, ANG_OFFSET);
@@ -38,6 +39,7 @@ public class HeroSword extends Weapon{
 	public void fire() {
 		windingUp = true;
 	}
+	
 	
 	public void weaponUpdate(){
 		
